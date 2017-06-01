@@ -1,0 +1,2 @@
+[run]
+omit = *config.py*, *mp3_generator.py*, *test*.py*
