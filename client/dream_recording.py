@@ -1,32 +1,37 @@
+from logging import getLogger
+from datetime import datetime
+from os import makedirs
+from os.path import isdir
+
+from client.config import MEMORY_DIR
+from client.audio import recognize_audio
+
+logger = getLogger('__main__')
+
+
+def gen_filename(directory):
+    if not isdir(directory):
+        makedirs(directory)
+    return '{0}dream_{1}.txt'.format(directory, datetime.now().strftime('%y-%m-%d'))
+
+
+def save(filename, memory):
+    assert isinstance(filename, str)
+    assert isinstance(memory, str)
+
+    logger.info('writing to file: {}'.format(filename))
+    with open(filename, 'a') as file:
+            file.write('{}\n'.format(memory))
+
+
 def record_dream():
-    pass
+    memory = recognize_audio()
+    if memory is not None:
+        logger.info("audio collected and decoded: {0}".format(memory))
+        save(gen_filename(MEMORY_DIR), memory)
+        return True
+
+    logger.info("failed to collect/decode")
+    return False
 
 
-# def record_dream():
-#     r.pause_threshold = ENTRY_PAUSE_THRESHOLD
-#     dream = list()
-#
-#     while True:
-#         logger.debug('waiting for audio')
-#         memory = recognize_audio()
-#         logger.debug('audio collected and decoded: {}'.format(memory))
-#
-#         if memory is None:
-#             play_fail()
-#         elif memory == STOP_KEYWORD:
-#             logger.debug('Keyword match [{}]'.format(STOP_KEYWORD))
-#             play_stop()
-#             return dream
-#         else:
-#             play_success()
-#             logger.debug('saving new memory')
-#             dream.append(memory)
-#
-#
-# def save(dream):
-#     filename = '{0}dream_{1}.txt'.format(OUTPUT_DIR, datetime.now().strftime('%y-%m-%d'))
-#     logger.debug('filename: {}'.format(filename))
-#
-#     with open(filename, 'a') as file:
-#         for memory in dream:
-#             file.write('{}\n'.format(memory))

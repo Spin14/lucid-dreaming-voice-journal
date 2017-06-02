@@ -3,10 +3,10 @@ from client.dream_recording import record_dream
 
 
 def default_response():
-    pass
+    return False
 
 keyword_to_response_dict = {
-    config.DREAM_RECORD: record_dream
+    config.DREAM_RECORD_KW: record_dream
 }
 
 
@@ -17,7 +17,7 @@ def get_keyword_response(keyword):
     if keyword in keyword_to_response_dict:
         return keyword, keyword_to_response_dict[keyword]
 
-    return '', default_response
+    return 'Unknown', default_response
 
 
 

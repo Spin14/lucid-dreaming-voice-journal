@@ -1,21 +1,19 @@
-from logging import getLogger, StreamHandler, FileHandler, Formatter, DEBUG
-
-from client.audio import recognize_audio
-
-from client.keyword_responses import get_keyword_response
+import logging
 
 from client.config import LOG_FILENAME, KEYWORD_PHRASE_TIME_LIMIT
+from client.audio import recognize_audio, adjust_source
+from client.keyword_responses import get_keyword_response
+
 
 # logging
-logger = getLogger(__name__)
-handler = StreamHandler()
-file_handler = FileHandler(LOG_FILENAME)
-formatter = Formatter('%(asctime)s %(name)-12s %(levelname)-8s %(message)s')
-handler.setFormatter(formatter)
+logger = logging.getLogger(__name__)
+
+file_handler = logging.FileHandler(LOG_FILENAME)
+formatter = logging.Formatter('%(asctime)s %(name)-12s %(levelname)-8s %(message)s')
 file_handler.setFormatter(formatter)
-logger.addHandler(handler)
+
 logger.addHandler(file_handler)
-logger.setLevel(DEBUG)
+logger.setLevel(logging.DEBUG)
 
 
 def capture_audio_keyword():
@@ -23,6 +21,7 @@ def capture_audio_keyword():
 
 
 def main():
+    adjust_source()
     try:
         while True:
             logger.info('waiting for audio keyword')
@@ -37,5 +36,6 @@ def main():
         logger.info('Exiting')
 
 
-main()
+if __name__ == '__main__':
+    main()
 

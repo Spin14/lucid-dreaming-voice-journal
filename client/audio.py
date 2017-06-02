@@ -11,8 +11,10 @@ r.pause_threshold = AUDIO_PAUSE_THRESHOLD
 
 micro = Microphone()
 
-with micro as sound_input:
-    r.adjust_for_ambient_noise(sound_input)
+
+def adjust_source():
+    with micro as source:
+        r.adjust_for_ambient_noise(source)
 
 
 def recognize_audio(time=None):
