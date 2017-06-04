@@ -148,7 +148,8 @@ class TestDreamRecording(TestCase):
 
 
 class TestDreamJournal(TestCase):
-
+    """Testing dream_journal.py"""
+    
     @patch('client.dream_journal.recognize_audio')
     def test_capture_audio_keyword(self, mock_recognize_audio):
         from client.dream_journal import capture_audio_keyword, KEYWORD_PHRASE_TIME_LIMIT
@@ -180,15 +181,6 @@ class TestDreamJournal(TestCase):
         capture_audio_keyword.side_effect = lambda: 'a_string'
         self.assertTrue(ready_for_keyword())
 
-
-
-
-
-
-
-
-
-# @patch('client.dream_journal.mock_adjust_source', side_effect=lambda: True)
 
 
 
