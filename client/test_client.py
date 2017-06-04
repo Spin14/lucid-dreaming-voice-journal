@@ -58,21 +58,19 @@ class TestAudio(TestCase):
 class TestKeywordResponses(TestCase):
     """Testing keyword_responses.py"""
 
-    def test_keyword_NONE(self):
+    def test_keyword_NONE_INVALID(self):
         from client.keyword_responses import get_keyword_response
+        from client.keyword_responses import default_response
 
         keyword, response = get_keyword_response(None)
 
         self.assertIsNone(keyword)
-        self.assertIsNone(response)
-
-    def test_keyword_INVALID(self):
-        from client.keyword_responses import get_keyword_response
-        from client.keyword_responses import default_response
+        self.assertEquals(response, default_response)
+        self.assertFalse(response())
 
         keyword, response = get_keyword_response('not_mapped')
 
-        self.assertEquals(keyword, 'Unknown')
+        self.assertIsNone(keyword)
         self.assertEquals(response, default_response)
         self.assertFalse(response())
 
@@ -164,6 +162,33 @@ class TestDreamJournal(TestCase):
         self.assertEqual(mock_recognize_audio.call_count, 1)
         mock_recognize_audio.assert_called_with(time=KEYWORD_PHRASE_TIME_LIMIT)
 
+    @patch('client.dream_journal.get_keyword_response')
+    @patch('client.dream_journal.capture_audio_keyword')
+    def test_main(self, capture_audio_keyword, mock_get_keyword_response):
+        from client.dream_journal import ready_for_keyword
+
+        def dummy_generator(keyword):
+            def dummy():
+                pass
+            return keyword, dummy
+
+        mock_get_keyword_response.side_effect = dummy_generator
+
+        capture_audio_keyword.side_effect = lambda: None
+        self.assertFalse(ready_for_keyword())
+
+        capture_audio_keyword.side_effect = lambda: 'a_string'
+        self.assertTrue(ready_for_keyword())
+
+
+
+
+
+
+
+
+
+# @patch('client.dream_journal.mock_adjust_source', side_effect=lambda: True)
 
 
 

@@ -24,10 +24,13 @@ def ready_for_keyword():
     logger.info('waiting for audio keyword')
     keyword, keyword_response = get_keyword_response(capture_audio_keyword())
 
-    if keyword_response is not None:
+    if keyword is not None:
         logger.info('running response for keyword: {0}'.format(keyword))
         keyword_response()
         logger.info('finished running response for keyword: {0}'.format(keyword))
+        return True
+
+    return False
 
 
 def main():

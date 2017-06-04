@@ -12,12 +12,12 @@ keyword_to_response_dict = {
 
 def get_keyword_response(keyword):
     if not isinstance(keyword, str):
-        return None, None
+        return None, default_response
 
     if keyword in keyword_to_response_dict:
         return keyword, keyword_to_response_dict[keyword]
 
-    return 'Unknown', default_response
+    return None, default_response
 
 
 
