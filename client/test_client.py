@@ -149,6 +149,25 @@ class TestDreamRecording(TestCase):
         self.assertEqual(m_gen_filename.call_count, 1)
 
 
+class TestDreamJournal(TestCase):
+
+    @patch('client.dream_journal.recognize_audio')
+    def test_capture_audio_keyword(self, mock_recognize_audio):
+        from client.dream_journal import capture_audio_keyword, KEYWORD_PHRASE_TIME_LIMIT
+
+        def dummy(**kwargs):
+            pass
+
+        mock_recognize_audio.side_effect = dummy
+
+        capture_audio_keyword()
+        self.assertEqual(mock_recognize_audio.call_count, 1)
+        mock_recognize_audio.assert_called_with(time=KEYWORD_PHRASE_TIME_LIMIT)
+
+
+
+
+
 
 
 

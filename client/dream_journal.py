@@ -20,18 +20,21 @@ def capture_audio_keyword():
     return recognize_audio(time=KEYWORD_PHRASE_TIME_LIMIT)
 
 
+def ready_for_keyword():
+    logger.info('waiting for audio keyword')
+    keyword, keyword_response = get_keyword_response(capture_audio_keyword())
+
+    if keyword_response is not None:
+        logger.info('running response for keyword: {0}'.format(keyword))
+        keyword_response()
+        logger.info('finished running response for keyword: {0}'.format(keyword))
+
+
 def main():
     adjust_source()
     try:
         while True:
-            logger.info('waiting for audio keyword')
-            keyword, keyword_response = get_keyword_response(capture_audio_keyword())
-
-            if keyword_response is not None:
-                logger.info('running response for keyword: {0}'.format(keyword))
-                keyword_response.run()
-                logger.info('finished running response for keyword: {0}'.format(keyword))
-
+            ready_for_keyword()
     except KeyboardInterrupt:
         logger.info('Exiting')
 
