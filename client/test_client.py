@@ -38,12 +38,6 @@ class TestKeywordResponses(TestCase):
         self.assertEquals(keyword, DREAM_RECORD_KW)
         self.assertEquals(response, record_dream)
 
-def dummy(x,y):
-    pass
-
-def dumm2(x):
-    pass
-
 
 class TestDreamRecording(TestCase):
     """Testing dream_recording.py"""
