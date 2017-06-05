@@ -2,7 +2,7 @@ from logging import getLogger
 
 from speech_recognition import Recognizer, Microphone, UnknownValueError, RequestError
 
-from client.config import AUDIO_PAUSE_THRESHOLD
+from dream_journal.config import AUDIO_PAUSE_THRESHOLD
 
 logger = getLogger('__main__')
 

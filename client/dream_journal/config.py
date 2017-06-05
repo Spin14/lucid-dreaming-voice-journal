@@ -12,7 +12,7 @@ DREAM_RECORD_KW = 'record'
 
 
 # filename / directories
-LOG_FILENAME = 'dream_journal.log'
-SOUND_DIR = 'sound/'
-MEMORY_DIR = 'dreams/'
+LOG_FILENAME = '../dream_journal.log'
+SOUND_DIR = '../sound/'
+MEMORY_DIR = '../dreams/'
 

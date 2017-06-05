@@ -1,5 +1,5 @@
-import client.config as config
-from client.dream_recording import record_dream
+import dream_journal.config as config
+from dream_journal.dream_recording import record_dream
 
 
 def default_response():

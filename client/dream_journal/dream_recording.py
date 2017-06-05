@@ -3,8 +3,8 @@ from datetime import datetime
 from os import makedirs
 from os.path import isdir
 
-from client.config import MEMORY_DIR
-from client.audio import recognize_audio
+from dream_journal.config import MEMORY_DIR
+from dream_journal.audio import recognize_audio
 
 logger = getLogger('__main__')
 
