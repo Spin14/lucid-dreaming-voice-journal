@@ -1,6 +1,5 @@
+"""
 from os import system
-
-from config import SOUND_DIR
 
 
 def _play_wav(s):
@@ -32,4 +31,4 @@ def play_stop():
 def play_end():
     _play_mp3('end')
 
-
+"""
