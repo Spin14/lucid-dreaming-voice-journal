@@ -1,0 +1,2 @@
+[run]
+omit = *venv/*, *test*.py*, *config.py*, *mp3_generator.py*, *feedback_sound.py*

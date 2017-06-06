@@ -5,7 +5,6 @@ from dream_journal.audio import recognize_audio, adjust_source
 from dream_journal.keyword_responses import get_keyword_response
 
 
-# logging
 logger = logging.getLogger(__name__)
 
 
