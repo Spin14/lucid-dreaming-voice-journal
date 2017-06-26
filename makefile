@@ -1,10 +1,10 @@
 .PHONY: test-client test-server test
 
 test-client:
-	cd client; client-venv/bin/pytest; cd ..
+	cd client; env/bin/pytest; cd ..
 	
 test-server:
-	cd server; server-venv/bin/pytest; cd ..
+	cd server; env/bin/pytest; cd ..
 
 test:
 	make test-server
